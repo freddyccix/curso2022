@@ -5,15 +5,15 @@ namespace Aplicacion.Caracteristicas.Estudiantes;
 
 public class ObtenerTodo
 {
-    private readonly ContextoEscuela contexto; //esta es mi dependencia
+    private readonly IContextoBD contexto; //esta es mi dependencia
 
-    public ObtenerTodo(ContextoEscuela contexto)
+    public ObtenerTodo(IContextoBD contexto)
     {
         this.contexto = contexto;
     }
 
-    public List<Estudiante> Ejecutar()
+    public IReadOnlyCollection<Estudiante> Ejecutar()
     {
-        return contexto.Estudiantes;
+        return contexto.Estudiantes.ToList();
     }
 }

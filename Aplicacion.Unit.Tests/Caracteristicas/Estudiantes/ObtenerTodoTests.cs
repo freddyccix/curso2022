@@ -10,7 +10,7 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_NoTraeNulo()
     {
-        ObtenerTodo sut = new(new ContextoEscuela());
+        ObtenerTodo sut = new(new ContextoEscuela(new List<Estudiante>()));
         var listaResultado = sut.Ejecutar();
 
         listaResultado.ShouldNotBeNull();
@@ -20,7 +20,7 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_TraeTodo()
     {
-        ContextoEscuela contexto = new();
+        ContextoEscuela contexto = new(new List<Estudiante>());
         contexto.Estudiantes.Add(
             new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 });
 
@@ -33,7 +33,7 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_ContarElementos()
     {
-        ContextoEscuela contexto = new();
+        ContextoEscuela contexto = new(new List<Estudiante>());
         contexto.Estudiantes.Add(
             new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
         );

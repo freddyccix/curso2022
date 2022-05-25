@@ -1,11 +1,19 @@
 ﻿using Aplicacion.Dominio;
+using Aplicacion.Infraestructura;
 
 namespace Aplicacion.Caracteristicas.Estudiantes;
 
 public class ObtenerPorId
 {
-    public Estudiante Ejecutar(int id)
+    private readonly IContextoBD contexto;
+
+    public ObtenerPorId(IContextoBD contexto)
     {
-        return new Estudiante();
+        this.contexto = contexto;
+    }
+
+    public Estudiante? Ejecutar(int id)
+    {
+        return contexto.Estudiantes.FirstOrDefault(x => x.Id == id);
     }
 }

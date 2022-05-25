@@ -2,7 +2,13 @@
 
 namespace Aplicacion.Infraestructura;
 
-public class ContextoEscuela
+public class ContextoEscuela : IContextoBD
 {
-    public List<Estudiante> Estudiantes { get; set; } = new();
+    public ContextoEscuela(IList<Estudiante> listaEstudiantes)
+    {
+        Estudiantes = listaEstudiantes;
+    }
+
+    //ienumerable, ilist
+    public IList<Estudiante>? Estudiantes { get; set; }
 }
