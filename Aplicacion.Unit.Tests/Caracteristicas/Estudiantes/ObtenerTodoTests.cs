@@ -10,7 +10,7 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_NoTraeNulo()
     {
-        ObtenerTodo sut = new(new ContextoEscuela(new List<Estudiante>()));
+        ObtenerTodo.Handler sut = new(new ContextoEscuela(new List<Estudiante>()));
         var listaResultado = sut.Ejecutar();
 
         listaResultado.ShouldNotBeNull();
@@ -24,7 +24,7 @@ public class ObtenerTodoTests
         contexto.Estudiantes.Add(
             new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 });
 
-        ObtenerTodo sut = new(contexto);
+        ObtenerTodo.Handler sut = new(contexto);
         var listaResultado = sut.Ejecutar();
 
         listaResultado.ShouldNotBeEmpty();
@@ -41,7 +41,7 @@ public class ObtenerTodoTests
             new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
 
-        ObtenerTodo sut = new(contexto);
+        ObtenerTodo.Handler sut = new(contexto);
         var listaResultado = sut.Ejecutar();
 
         listaResultado.Count.ShouldBe(2);

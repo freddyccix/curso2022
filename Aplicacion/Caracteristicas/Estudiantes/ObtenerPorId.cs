@@ -3,7 +3,12 @@ using Aplicacion.Infraestructura;
 
 namespace Aplicacion.Caracteristicas.Estudiantes;
 
-public class ObtenerPorId
+public interface IObtenerPorId
+{
+    Estudiante Ejecutar(int id);
+}
+
+public class ObtenerPorId : IObtenerPorId
 {
     private readonly IContextoBD contexto;
 

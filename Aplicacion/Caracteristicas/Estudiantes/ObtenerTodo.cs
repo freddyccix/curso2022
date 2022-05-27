@@ -1,19 +1,39 @@
-﻿using Aplicacion.Dominio;
-using Aplicacion.Infraestructura;
+﻿using Aplicacion.Infraestructura;
 
 namespace Aplicacion.Caracteristicas.Estudiantes;
 
 public class ObtenerTodo
 {
-    private readonly IContextoBD contexto; //esta es mi dependencia
-
-    public ObtenerTodo(IContextoBD contexto)
+    public interface IObtenerTodo
     {
-        this.contexto = contexto;
+        IReadOnlyCollection<EstudianteDTO> Ejecutar();
     }
 
-    public IReadOnlyCollection<Estudiante> Ejecutar()
+    public class Handler : IObtenerTodo
     {
-        return contexto.Estudiantes.ToList();
+        private readonly IContextoBD contexto;
+
+        public Handler(IContextoBD contexto)
+        {
+            this.contexto = contexto;
+        }
+
+        public IReadOnlyCollection<EstudianteDTO> Ejecutar()
+        {
+            return contexto.Estudiantes
+                .Select(x =>
+                    new EstudianteDTO
+                    {
+                        Id = x.Id.ToString(),
+                        NombreEstudiante = x.NombreCompleto
+                    })
+                .ToList();
+        }
+    }
+
+    public class EstudianteDTO
+    {
+        public string Id { get; set; }
+        public string NombreEstudiante { get; set; }
     }
 }
