@@ -1,4 +1,6 @@
-﻿using Aplicacion.Infraestructura;
+﻿using Aplicacion.Dominio;
+using Aplicacion.Infraestructura;
+using AutoMapper;
 
 namespace Aplicacion.Caracteristicas.Estudiantes;
 
@@ -6,34 +8,35 @@ public class ObtenerTodo
 {
     public interface IObtenerTodo
     {
-        IReadOnlyCollection<EstudianteDTO> Ejecutar();
+        IReadOnlyCollection<Respuesta> Ejecutar();
     }
 
     public class Handler : IObtenerTodo
     {
         private readonly IContextoBD contexto;
+        private readonly IMapper mapper;
 
-        public Handler(IContextoBD contexto)
+        public Handler(IContextoBD contexto, IMapper mapper)
         {
             this.contexto = contexto;
+            this.mapper = mapper;
         }
 
-        public IReadOnlyCollection<EstudianteDTO> Ejecutar()
+        public IReadOnlyCollection<Respuesta> Ejecutar()
         {
             return contexto.Estudiantes
-                .Select(x =>
-                    new EstudianteDTO
-                    {
-                        Id = x.Id.ToString(),
-                        NombreEstudiante = x.NombreCompleto
-                    })
+                .ProjectTo<Respuesta>(mapper.ConfigurationProvider)
                 .ToList();
         }
     }
 
-    public class EstudianteDTO
+    public class MapRespuesta : Profile
     {
-        public string Id { get; set; }
-        public string NombreEstudiante { get; set; }
+        public MapRespuesta()
+        {
+            CreateMap<Estudiante, Respuesta>();
+        }
     }
+
+    public record Respuesta(string Id, string NombreCompleto);
 }

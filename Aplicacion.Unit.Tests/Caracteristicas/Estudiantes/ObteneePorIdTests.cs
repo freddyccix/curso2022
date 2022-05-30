@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Caracteristicas.Estudiantes;
 using Aplicacion.Dominio;
 using Aplicacion.Infraestructura;
+using AutoMapper;
 using Shouldly;
 
 namespace Aplicacion.Unit.Tests.Caracteristicas.Estudiantes;
@@ -17,7 +18,7 @@ public class ObteneePorIdTests
         contexto.Estudiantes.Add(
             new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
-        ObtenerPorId sut = new(contexto);
+        ObtenerPorId.Handler sut = new(contexto, new Mapper());
 
         var resultado = sut.Ejecutar(2);
 
@@ -35,7 +36,7 @@ public class ObteneePorIdTests
         contexto.Estudiantes.Add(
             new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
-        ObtenerPorId sut = new(contexto);
+        ObtenerPorId.Handler sut = new(contexto);
 
         var resultado = sut.Ejecutar(3);
 

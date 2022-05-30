@@ -1,24 +1,42 @@
 ﻿using Aplicacion.Dominio;
 using Aplicacion.Infraestructura;
+using AutoMapper;
 
 namespace Aplicacion.Caracteristicas.Estudiantes;
 
-public interface IObtenerPorId
+public class ObtenerPorId
 {
-    Estudiante Ejecutar(int id);
-}
-
-public class ObtenerPorId : IObtenerPorId
-{
-    private readonly IContextoBD contexto;
-
-    public ObtenerPorId(IContextoBD contexto)
+    public interface IObtenerPorId
     {
-        this.contexto = contexto;
+        Respuesta Ejecutar(int? id);
     }
 
-    public Estudiante? Ejecutar(int id)
+    public class Handler : IObtenerPorId
     {
-        return contexto.Estudiantes.FirstOrDefault(x => x.Id == id);
+        private readonly IContextoBD contexto;
+        private readonly IMapper mapper;
+
+        public Handler(IContextoBD contexto, IMapper mapper)
+        {
+            this.contexto = contexto;
+            this.mapper = mapper;
+        }
+
+        public Respuesta? Ejecutar(int? id)
+        {
+            var estudianteBase = contexto.Estudiantes
+                .FirstOrDefault(x => x.Id == id);
+            return mapper.Map<Respuesta>(estudianteBase);
+        }
+
+        public class MapRespuesta : Profile
+        {
+            public MapRespuesta()
+            {
+                CreateMap<Estudiante, Respuesta>();
+            }
+        }
     }
+
+    public record Respuesta(string Id, string Nombres, string Apellidos, string Edad);
 }

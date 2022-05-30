@@ -1,5 +1,4 @@
 using Aplicacion.Caracteristicas.Estudiantes;
-using Aplicacion.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -8,23 +7,25 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class EstudiantesController : ControllerBase
 {
-    private readonly IObtenerPorId operacionObtenerPorId;
+    private readonly ObtenerPorId.IObtenerPorId operacionObtenerPorId;
     private readonly ObtenerTodo.IObtenerTodo operacionObtenerTodo;
 
-    public EstudiantesController(ObtenerTodo.IObtenerTodo operacionObtenerTodo, IObtenerPorId operacionObtenerPorId)
+    public EstudiantesController(
+        ObtenerTodo.IObtenerTodo operacionObtenerTodo,
+        ObtenerPorId.IObtenerPorId operacionObtenerPorId)
     {
         this.operacionObtenerTodo = operacionObtenerTodo;
         this.operacionObtenerPorId = operacionObtenerPorId;
     }
 
     [HttpGet]
-    public IEnumerable<ObtenerTodo.EstudianteDTO> GetAll()
+    public IEnumerable<ObtenerTodo.Respuesta> GetAll()
     {
         return operacionObtenerTodo.Ejecutar();
     }
 
     [HttpGet("{id:int}")]
-    public Estudiante GetById(int id)
+    public ObtenerPorId.Respuesta GetById(int id)
     {
         return operacionObtenerPorId.Ejecutar(id);
     }
