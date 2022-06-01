@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Aplicacion.Persistencia
 {
-    public partial class CursoContext : DbContext,IContextoBD
+    public partial class CursoContext : DbContext
     {
         public CursoContext()
         {

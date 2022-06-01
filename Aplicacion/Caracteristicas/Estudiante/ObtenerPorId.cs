@@ -1,31 +1,33 @@
 ﻿using Aplicacion.Dominio.Entidades;
 using Aplicacion.Persistencia;
 using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aplicacion.Caracteristicas.Estudiante;
 
 public class ObtenerPorId
 {
-    public interface IObtenerPorId
-    {
-        Respuesta Ejecutar(int? id);
-    }
+    public record Consulta(int Id) : IRequest<Respuesta>;
 
-    public class Handler : IObtenerPorId
+    public class Handler : IRequestHandler<Consulta, Respuesta>
     {
-        private readonly IContextoBD contexto;
+        private readonly CursoContext contexto;
         private readonly IMapper mapper;
 
-        public Handler(IContextoBD contexto, IMapper mapper)
+        public Handler(CursoContext contexto, IMapper mapper)
         {
             this.contexto = contexto;
             this.mapper = mapper;
         }
 
-        public Respuesta? Ejecutar(int? id)
+        public async Task<Respuesta> Handle(Consulta request, CancellationToken cancellationToken)
         {
-            var estudianteBase = contexto.Estudiantes
-                .FirstOrDefault(x => x.Id == id);
+            var estudianteBase = await contexto.Estudiantes
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var estudiante2 =
+                await contexto.Estudiantes.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var estudiante3 = await contexto.Estudiantes.FindAsync(request.Id);
             return mapper.Map<Respuesta>(estudianteBase);
         }
 

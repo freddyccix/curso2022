@@ -2,31 +2,31 @@
 using Aplicacion.Persistencia;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aplicacion.Caracteristicas.Estudiante;
 
 public class ObtenerTodo
 {
-    public interface IObtenerTodo
-    {
-        IReadOnlyCollection<Respuesta> Ejecutar();
-    }
+    public record Consulta : IRequest<IReadOnlyCollection<Respuesta>>;
 
-    public class Handler : IObtenerTodo
+    public class Handler : IRequestHandler<Consulta, IReadOnlyCollection<Respuesta>>
     {
-        private readonly IContextoBD contexto;
+        private readonly CursoContext contexto;
         private readonly IMapper mapper;
 
-        public Handler(IContextoBD contexto, IMapper mapper)
+        public Handler(CursoContext contexto, IMapper mapper)
         {
             this.contexto = contexto;
             this.mapper = mapper;
         }
 
-        public IReadOnlyCollection<Respuesta> Ejecutar()
+        public async Task<IReadOnlyCollection<Respuesta>> Handle(Consulta request, CancellationToken cancellationToken)
         {
-            return contexto.Estudiantes
-                .ProjectTo<Respuesta>(mapper.ConfigurationProvider).ToList();
+            return await contexto.Estudiantes
+                .ProjectTo<Respuesta>(mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
         }
     }
 
