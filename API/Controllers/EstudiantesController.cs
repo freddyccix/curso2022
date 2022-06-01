@@ -1,4 +1,4 @@
-using Aplicacion.Caracteristicas.Estudiantes;
+using Aplicacion.Caracteristicas.Estudiante;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

@@ -1,4 +1,4 @@
-﻿namespace Aplicacion.Caracteristicas.Estudiantes;
+﻿namespace Aplicacion.Caracteristicas.Estudiante;
 
 public class EliminarPorId
 {

@@ -1,8 +1,8 @@
-﻿using Aplicacion.Dominio;
-using Aplicacion.Infraestructura;
+﻿using Aplicacion.Dominio.Entidades;
+using Aplicacion.Persistencia;
 using AutoMapper;
 
-namespace Aplicacion.Caracteristicas.Estudiantes;
+namespace Aplicacion.Caracteristicas.Estudiante;
 
 public class ObtenerPorId
 {
@@ -33,7 +33,7 @@ public class ObtenerPorId
         {
             public MapRespuesta()
             {
-                CreateMap<Estudiante, Respuesta>();
+                CreateMap<Estudiantes, Respuesta>();
             }
         }
     }

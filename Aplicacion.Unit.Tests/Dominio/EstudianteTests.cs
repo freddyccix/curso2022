@@ -7,7 +7,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerEdad_RetornaEdad()
     {
-        Estudiante sut = new() { Edad = 1 };
+        EstudianteCurso sut = new() { Edad = 1 };
 
         var resultado = sut.Edad;
 
@@ -17,7 +17,7 @@ public class EstudianteTests
     [Fact]
     public void CambiarEdad_RetornaEdad()
     {
-        Estudiante sut = new()
+        EstudianteCurso sut = new()
         {
             Edad = 5
         };
@@ -28,7 +28,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombres_RetornaNombres()
     {
-        Estudiante sut = new() { Nombres = "Freddy" };
+        EstudianteCurso sut = new() { Nombres = "Freddy" };
 
         var resultado = sut.Nombres;
 
@@ -38,7 +38,7 @@ public class EstudianteTests
     [Fact]
     public void CambiarNombres_RetornaNombres()
     {
-        Estudiante sut = new()
+        EstudianteCurso sut = new()
         {
             Nombres = "Freddy"
         };
@@ -49,7 +49,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerApellidos_RetornaApellidos()
     {
-        Estudiante sut = new() { Apellidos = "Alarcón" };
+        EstudianteCurso sut = new() { Apellidos = "Alarcón" };
 
         var resultado = sut.Apellidos;
 
@@ -59,7 +59,7 @@ public class EstudianteTests
     [Fact]
     public void CambiarApellidos_RetornaApellidos()
     {
-        Estudiante sut = new()
+        EstudianteCurso sut = new()
         {
             Apellidos = "Alarcón"
         };
@@ -70,7 +70,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_RetornaNombreCompleto()
     {
-        Estudiante sut = new() { Nombres = "Freddy", Apellidos = "Alarcón" };
+        EstudianteCurso sut = new() { Nombres = "Freddy", Apellidos = "Alarcón" };
 
         var resultado = sut.NombreCompleto;
 
@@ -80,7 +80,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinApellido_RetornaNombres()
     {
-        Estudiante sut = new() { Nombres = "Freddy" };
+        EstudianteCurso sut = new() { Nombres = "Freddy" };
 
         var resultado = sut.NombreCompleto;
 
@@ -90,7 +90,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinNombre_RetornaApellidos()
     {
-        Estudiante sut = new() { Apellidos = "Alarcón" };
+        EstudianteCurso sut = new() { Apellidos = "Alarcón" };
 
         var resultado = sut.NombreCompleto;
 
@@ -100,7 +100,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinNombreSinApellido_RetornaVacio()
     {
-        Estudiante sut = new();
+        EstudianteCurso sut = new();
 
         var resultado = sut.NombreCompleto;
 

@@ -11,12 +11,12 @@ public class ObteneePorIdTests
     [Fact]
     public void ObtenerPorId_TraeUnValor()
     {
-        var contexto = new ContextoEscuela(new List<Estudiante>());
+        var contexto = new ContextoEscuela(new List<EstudianteCurso>());
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
+            new EstudianteCurso { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
         );
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
+            new EstudianteCurso { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
         ObtenerPorId.Handler sut = new(contexto, new Mapper());
 
@@ -29,12 +29,12 @@ public class ObteneePorIdTests
     [Fact]
     public void ObtenerId_EstudianteNoExiste_DevuelveNulo()
     {
-        var contexto = new ContextoEscuela(new List<Estudiante>());
+        var contexto = new ContextoEscuela(new List<EstudianteCurso>());
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
+            new EstudianteCurso { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
         );
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
+            new EstudianteCurso { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
         ObtenerPorId.Handler sut = new(contexto);
 

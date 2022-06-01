@@ -10,7 +10,7 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_NoTraeNulo()
     {
-        ObtenerTodo.Handler sut = new(new ContextoEscuela(new List<Estudiante>()));
+        ObtenerTodo.Handler sut = new(new ContextoEscuela(new List<EstudianteCurso>()));
         var listaResultado = sut.Ejecutar();
 
         listaResultado.ShouldNotBeNull();
@@ -20,9 +20,9 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_TraeTodo()
     {
-        ContextoEscuela contexto = new(new List<Estudiante>());
+        ContextoEscuela contexto = new(new List<EstudianteCurso>());
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 });
+            new EstudianteCurso { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 });
 
         ObtenerTodo.Handler sut = new(contexto);
         var listaResultado = sut.Ejecutar();
@@ -33,12 +33,12 @@ public class ObtenerTodoTests
     [Fact]
     public void ObtenerTodo_ContarElementos()
     {
-        ContextoEscuela contexto = new(new List<Estudiante>());
+        ContextoEscuela contexto = new(new List<EstudianteCurso>());
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
+            new EstudianteCurso { Id = 1, Apellidos = "Alarcón", Nombres = "Freddy", Edad = 38 }
         );
         contexto.Estudiantes.Add(
-            new Estudiante { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
+            new EstudianteCurso { Id = 2, Apellidos = "Villamar", Nombres = "Xavier", Edad = 38 }
         );
 
         ObtenerTodo.Handler sut = new(contexto);

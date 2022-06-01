@@ -1,8 +1,9 @@
-﻿using Aplicacion.Dominio;
-using Aplicacion.Infraestructura;
+﻿using Aplicacion.Dominio.Entidades;
+using Aplicacion.Persistencia;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
-namespace Aplicacion.Caracteristicas.Estudiantes;
+namespace Aplicacion.Caracteristicas.Estudiante;
 
 public class ObtenerTodo
 {
@@ -25,8 +26,7 @@ public class ObtenerTodo
         public IReadOnlyCollection<Respuesta> Ejecutar()
         {
             return contexto.Estudiantes
-                .ProjectTo<Respuesta>(mapper.ConfigurationProvider)
-                .ToList();
+                .ProjectTo<Respuesta>(mapper.ConfigurationProvider).ToList();
         }
     }
 
@@ -34,7 +34,7 @@ public class ObtenerTodo
     {
         public MapRespuesta()
         {
-            CreateMap<Estudiante, Respuesta>();
+            CreateMap<Estudiantes, Respuesta>();
         }
     }
 
