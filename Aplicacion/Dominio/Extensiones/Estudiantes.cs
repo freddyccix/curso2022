@@ -3,9 +3,10 @@
 public partial class Estudiantes
 {
     public string NombreCompleto =>
-        Nombres == string.Empty ? Apellidos :
-        Apellidos == string.Empty ? Nombres :
-        Nombres == string.Empty && Apellidos == string.Empty ? string.Empty : $"{Apellidos}, {Nombres}";
+        string.IsNullOrEmpty(Nombres) && string.IsNullOrEmpty(Apellidos) ? string.Empty
+        : string.IsNullOrEmpty(Nombres) ? Apellidos
+        : string.IsNullOrEmpty(Apellidos) ? Nombres
+        : $"{Apellidos}, {Nombres}";
 
-    public int Edad => DateTime.Today.AddTicks(-FechaNacimiento.Value.Ticks).Year - 1;
+    public int Edad => FechaNacimiento is null ? -1 : DateTime.Today.AddTicks(-FechaNacimiento.Value.Ticks).Year - 1;
 }

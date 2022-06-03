@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Aplicacion\Aplicacion.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Caracteristicas\Estudiantes\" />
+  </ItemGroup>
+
 </Project>

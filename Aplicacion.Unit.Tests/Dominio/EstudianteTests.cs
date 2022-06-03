@@ -1,34 +1,44 @@
-using Aplicacion.Dominio;
+using Aplicacion.Dominio.Entidades;
+using Shouldly;
 
 namespace Aplicacion.Unit.Tests.Dominio;
 
 public class EstudianteTests
 {
     [Fact]
-    public void ObtenerEdad_RetornaEdad()
+    public void ObtenerEdad_RetornaEdadMesPosterior()
     {
-        EstudianteCurso sut = new() { Edad = 1 };
+        Estudiantes sut = new() { FechaNacimiento = new DateTime(1983, 8, 16) };
 
         var resultado = sut.Edad;
 
-        Assert.Equal(1, resultado);
+        resultado.ShouldBe(38);
     }
 
     [Fact]
-    public void CambiarEdad_RetornaEdad()
+    public void ObtenerEdad_RetornaEdadMesAnterior()
     {
-        EstudianteCurso sut = new()
-        {
-            Edad = 5
-        };
+        Estudiantes sut = new() { FechaNacimiento = new DateTime(1983, 5, 16) };
 
-        Assert.Equal(5, sut.Edad);
+        var resultado = sut.Edad;
+
+        resultado.ShouldBe(39);
+    }
+
+    [Fact]
+    public void ObtenerEdad_FechaNula_RetornaCero()
+    {
+        Estudiantes sut = new();
+
+        var resultado = sut.Edad;
+
+        resultado.ShouldBe(-1);
     }
 
     [Fact]
     public void ObtenerNombres_RetornaNombres()
     {
-        EstudianteCurso sut = new() { Nombres = "Freddy" };
+        Estudiantes sut = new() { Nombres = "Freddy" };
 
         var resultado = sut.Nombres;
 
@@ -38,7 +48,7 @@ public class EstudianteTests
     [Fact]
     public void CambiarNombres_RetornaNombres()
     {
-        EstudianteCurso sut = new()
+        Estudiantes sut = new()
         {
             Nombres = "Freddy"
         };
@@ -49,7 +59,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerApellidos_RetornaApellidos()
     {
-        EstudianteCurso sut = new() { Apellidos = "Alarcón" };
+        Estudiantes sut = new() { Apellidos = "Alarcón" };
 
         var resultado = sut.Apellidos;
 
@@ -59,7 +69,7 @@ public class EstudianteTests
     [Fact]
     public void CambiarApellidos_RetornaApellidos()
     {
-        EstudianteCurso sut = new()
+        Estudiantes sut = new()
         {
             Apellidos = "Alarcón"
         };
@@ -70,7 +80,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_RetornaNombreCompleto()
     {
-        EstudianteCurso sut = new() { Nombres = "Freddy", Apellidos = "Alarcón" };
+        Estudiantes sut = new() { Nombres = "Freddy", Apellidos = "Alarcón" };
 
         var resultado = sut.NombreCompleto;
 
@@ -80,7 +90,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinApellido_RetornaNombres()
     {
-        EstudianteCurso sut = new() { Nombres = "Freddy" };
+        Estudiantes sut = new() { Nombres = "Freddy" };
 
         var resultado = sut.NombreCompleto;
 
@@ -90,7 +100,7 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinNombre_RetornaApellidos()
     {
-        EstudianteCurso sut = new() { Apellidos = "Alarcón" };
+        Estudiantes sut = new() { Apellidos = "Alarcón" };
 
         var resultado = sut.NombreCompleto;
 
@@ -100,10 +110,20 @@ public class EstudianteTests
     [Fact]
     public void ObtenerNombreCompleto_SinNombreSinApellido_RetornaVacio()
     {
-        EstudianteCurso sut = new();
+        Estudiantes sut = new();
 
         var resultado = sut.NombreCompleto;
 
         Assert.Equal(string.Empty, resultado);
+    }
+
+    [Fact]
+    public void ObtenerId_RetornaId()
+    {
+        Estudiantes sut = new() { Id = 3 };
+
+        var resultado = sut.Id;
+
+        Assert.Equal(3, resultado);
     }
 }
