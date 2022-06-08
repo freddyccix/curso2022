@@ -1,4 +1,5 @@
 using Aplicacion;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddServerSideBlazor();
 
 //Este es nuestro
 builder.Services.AddAplicacion(builder.Configuration);
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
