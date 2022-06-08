@@ -1,6 +1,8 @@
-﻿namespace Aplicacion.Dominio.Entidades;
+﻿using Aplicacion.Dominio.Comunes;
 
-public partial class Estudiantes
+namespace Aplicacion.Dominio.Entidades;
+
+public partial class Estudiantes : IEntity
 {
     public string NombreCompleto =>
         string.IsNullOrEmpty(Nombres) && string.IsNullOrEmpty(Apellidos) ? string.Empty

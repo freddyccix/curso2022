@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Throw" Version="1.2.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <InternalsVisibleTo Include="Aplicacio.Integration.Tests" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Aplicacion\Aplicacion.csproj" />
   </ItemGroup>
 

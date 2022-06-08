@@ -24,9 +24,11 @@ public class ObtenerTodo
 
         public async Task<IReadOnlyCollection<Respuesta>> Handle(Consulta request, CancellationToken cancellationToken)
         {
-            return await contexto.Estudiantes
+            IReadOnlyCollection<Respuesta> respuesta = await contexto.Estudiantes
                 .ProjectTo<Respuesta>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+                .ToArrayAsync(cancellationToken);
+
+            return respuesta;
         }
     }
 
@@ -38,5 +40,5 @@ public class ObtenerTodo
         }
     }
 
-    public record Respuesta(string Id, string NombreCompleto);
+    public record Respuesta(string Id, string NombreCompleto, string Edad, string Direccion);
 }

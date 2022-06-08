@@ -1,0 +1,48 @@
+﻿@page "/estudiantes"
+@using Aplicacion.Caracteristicas.Estudiante
+@using MediatR
+@inject IMediator Mediador;
+
+
+<PageTitle>Estudiantes</PageTitle>
+
+
+<h1>Lista de estudiantes</h1>
+
+
+@if (forecasts == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre del estudiante</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.NombreCompleto</td>
+                    <td>@forecast.Edad</td>
+                    <td>@forecast.Direccion</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IReadOnlyCollection<ObtenerTodo.Respuesta>? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Mediador.Send(new ObtenerTodo.Consulta());
+    }
+}
